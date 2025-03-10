@@ -16,8 +16,13 @@ INSERT INTO PIECE (ref_piece, libelle_piece, description_piece, prix_unitaire) V
 INSERT INTO PIECE (ref_piece, libelle_piece, description_piece, prix_unitaire) VALUES 
 (6, 'Segment de fuselage', 'Partie du fuselage', 2000);
 
-INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES (5, 1, 8);
-INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES (5, 2, 20);
-INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES (5, 3, 4);
-INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES (5, 4, 1);
-INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES (6, 5, 1);
+INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES 
+(5, 1, 8);
+INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES 
+(5, 2, 20);
+INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES 
+(5, 3, 4);
+INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES 
+(5, 4, 1);
+INSERT INTO COMPOSER (ref_piece_composee, ref_piece_composante, quantite) VALUES 
+(6, 5, 1);
