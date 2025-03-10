@@ -1,0 +1,2 @@
+PIÈCE: réf. pièce, libellé pièce, description, prix unitaire
+COMPOSER, 0N [composée] PIÈCE, 0N [composante] PIÈCE: quantité
