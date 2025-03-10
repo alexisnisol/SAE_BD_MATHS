@@ -13,10 +13,18 @@ JOIN COMPOSER c ON p.ref_piece = c.ref_piece_composee
 GROUP BY p.libelle_piece
 ORDER BY nombre_composants DESC;
 
-
-
 -- 4 Comptez combien de pièces composées existent dans la base.
 
 select count(*) AS NB_PIECES_COMPOSEES from PIECE p
 where exists (select * from COMPOSER c where c.ref_piece_composee = p.ref_piece);
 
+
+-- 5 Calculez le coût total de chaque pièce composée en additionnant le prix de ses composants directs.
+
+SELECT p.libelle_piece AS piece_composee,
+       SUM(c.quantite * pc.prix_unitaire) AS cout_total
+FROM PIECE p
+JOIN COMPOSER c ON p.ref_piece = c.ref_piece_composee
+JOIN PIECE pc ON c.ref_piece_composante = pc.ref_piece
+GROUP BY p.libelle_piece
+ORDER BY cout_total DESC;
