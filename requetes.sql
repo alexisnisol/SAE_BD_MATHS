@@ -28,3 +28,17 @@ JOIN COMPOSER c ON p.ref_piece = c.ref_piece_composee
 JOIN PIECE pc ON c.ref_piece_composante = pc.ref_piece
 GROUP BY p.libelle_piece
 ORDER BY cout_total DESC;
+
+--6 Trouvez toutes les pièces qui entrent dans la fabrication d’une pièce composée, directement ou indirectement. La réponse est une table qui, pour chaque pièce composée,indique son composant, direct ou indirect. Cette table est ordonnée par le id de la pièce composée.
+SELECT ref_piece_composee, 
+       LISTAGG(libelle_piece, ', ') WITHIN GROUP (ORDER BY libelle_piece) AS composants
+FROM (
+    SELECT DISTINCT 
+        CONNECT_BY_ROOT c.ref_piece_composee AS ref_piece_composee, 
+        p.libelle_piece
+    FROM COMPOSER c
+    JOIN PIECE p ON c.ref_piece_composante = p.ref_piece
+    CONNECT BY PRIOR c.ref_piece_composante = c.ref_piece_composee
+)
+GROUP BY ref_piece_composee
+ORDER BY ref_piece_composee;
