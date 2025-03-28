@@ -1,18 +1,24 @@
-CREATE OR REPLACE TYPE equipeT as OBJECT (
+-- Création des types objets
+CREATE TYPE equipeT AS OBJECT (
   nom VARCHAR2(42),
   fonction VARCHAR2(42)
 );
+/
 
-CREATE TYPE equipeTab as TABLE OF equipeT;
+CREATE TYPE equipeTab AS TABLE OF equipeT;
+/ 
 
-CREATE OR REPLACE TYPE indiceQualiteT AS OBJECT (
+CREATE TYPE indiceQualiteT AS OBJECT (
   nom VARCHAR2(42),
   valeur NUMBER,
   valeur2 NUMBER
 );
+/
 
-CREATE TYPE indiceQualiteList as VARRAY(10) OF indiceQualiteT;
+CREATE TYPE indiceQualiteList AS VARRAY(10) OF indiceQualiteT;
+/ 
 
+-- Création de la table PIECE
 CREATE TABLE PIECE (
   ref_piece NUMBER PRIMARY KEY,
   libelle_piece VARCHAR2(42),
@@ -22,10 +28,9 @@ CREATE TABLE PIECE (
   indiceQualite indiceQualiteList,
   prix_unitaire NUMBER
 )
-NESTED TABLE equipe STORE AS equipe_tab_nt,
-NESTED TABLE indiceQualite STORE AS indiceQualite_tab_nt;
+NESTED TABLE equipe STORE AS equipe_tab_nt;
 
-
+-- Création de la table COMPOSER
 CREATE TABLE COMPOSER (
   ref_piece_composee NUMBER NOT NULL,
   ref_piece_composante NUMBER NOT NULL,

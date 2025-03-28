@@ -1,2 +1,3 @@
 DROP TABLE COMPOSER;
 DROP TABLE PIECE;
+purge recyclebin;
