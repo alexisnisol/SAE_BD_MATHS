@@ -1,0 +1,35 @@
+% piece(ref, libelle, description, prix)
+piece(1, "Vis en titane", "Vis résistante", 5).
+piece(2, "Rivet en aluminium", "Rivet léger", 3).
+piece(3, "Raidisseur en composite", "Renforce la structure", 20).
+piece(4, "Plaque en alliage", "Plaque de structure", 50).
+piece(5, "Panneau de fuselage", "Assemblage de plusieurs pièces", 0).
+
+
+% composer(ref_piece_composee, ref_piece_composante, quantite)
+composer(5, 1, 8).  % Le panneau contient 8 vis en titane
+composer(5, 2, 20). % Le panneau contient 20 rivets
+composer(5, 3, 4).  % Le panneau contient 4 raidisseurs
+composer(5, 4, 1).  % Le panneau contient 1 plaque
+
+
+% Règle de base : composant direct
+composant(X, Y) :- composer(X, Y, _).
+
+% Règle récursive : si Z est un composant direct de X et que Y est un composant (direct ou indirect) de Z,
+% alors Y est aussi un composant de X.
+composant(X, Y) :- composer(X, Z, _), composant(Z, Y).
+
+
+% Prédicat indiquant qu'une pièce Y a un prix de 300 euros.
+prix_300(Y) :- piece(Y, _, _, 300).
+
+% Une pièce X a un composant cher si elle possède au moins un composant Y dont le prix est 300.
+a_un_composant_cher(X) :- composer(X, Y, _), prix_300(Y).
+
+% Une pièce X (ici on se focalise sur les pièces composées, par exemple celles qui apparaissent dans composer)
+% sans aucun composant dont le prix est 300.
+piece_sans_composant_cher(X) :- composer(X, _, _), not a_un_composant_cher(X).
+
+% Pour afficher le nom de la pièce, on peut joindre avec le prédicat piece.
+resultat(X, Nom) :- piece_sans_composant_cher(X), piece(X, Nom, _, _).
